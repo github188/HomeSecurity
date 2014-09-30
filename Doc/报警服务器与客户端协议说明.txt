@@ -1,0 +1,26 @@
+报警消息推送 长连接 端口：12004
+一、云视通方案
+协议说明：设备发生报警，向报警服务器上报信息。图片和视频文件名由设备发送，服务器不做处理直接推给客户端。
+push:
+{
+    JK_ALARM_GUID			: <string> , (报警唯一标识 32位)
+    JK_DEVICE_GUID			: <string> , (设备云视通号)
+    JK_ALARM_TIMESTAMP		: <int> ,    (时间戳 time的返回值。云视通号与时间戳确定一次报警)
+    JK_DEVICE_NAME			: <string> , (设备名)
+    JK_DEVICE_CHANNEL_NO	: <int> ,    (发生报警的通道号)
+    JK_ALARM_TYPE			: <int> ,    (报警类型)
+    JK_ALARM_PIC			: <string> , (报警图片名称)
+    JK_ALARM_VIDEO			: <string> , (报警视频名称)
+}
+
+二、FTP方案
+
+
+
+
+
+
+
+
+
+调试实例:

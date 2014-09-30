@@ -1,0 +1,125 @@
+连接端口：12008  长连接
+
+一、云视通方案
+协议说明：设备发生报警，向报警服务器上报信息。图片和视频文件名由设备发送，服务器不做处理直接推给客户端。
+request:
+{
+    JK_MESSAGE_ID			: <int> ,    (消息ID)
+    JK_MESSAGE_TYPE			: <int> ,    (PUSH_ALARM_MESSAGE 2219)
+    JK_PROTO_VERSION			: <string> , (1.0)
+    JK_LOGIC_PROCESS_TYPE		: <int> ,    (IM_DEV_DIRECT 9)
+    JK_ALARM_GUID			: <string> , (报警唯一标识 32位)
+    JK_DEVICE_GUID			: <string> , (设备云视通号)
+    JK_ALARM_TIMESTAMP			: <int> ,    (时间戳 time的返回值。云视通号与时间戳确定一次报警)
+    JK_DEVICE_NAME			: <string> , (设备名)
+    JK_DEVICE_CHANNEL_NO		: <int> ,    (发生报警的通道号)
+    JK_ALARM_TYPE			: <int> ,    (报警类型)
+    JK_ALARM_PIC			: <string> , (报警图片名称)
+    JK_ALARM_VIDEO			: <string> , (报警视频名称)
+}
+response:
+{
+    JK_MESSAGE_ID 	: <int> ,
+    JK_MESSAGE_TYPE 	: <int> , (PUSH_ALARM_MESSAGE_RESPONSE 2220)
+    JK_RESULT		: <int> , (0正确,其他为错误码)
+}
+返回值说明：0正确；-10请求格式错误；-1发送失败。
+
+
+
+二、FTP方案
+协议说明：设备发生报警，向报警服务器上报信息。图片/视频的URL由服务器通过云视通号和时间戳组织。
+request:
+{
+    JK_MESSAGE_ID			: <int> ,    (消息ID)
+    JK_MESSAGE_TYPE			: <int> ,    (PUSH_ALARM_MESSAGE_FTP 2221)
+    JK_PROTO_VERSION			: <string> , (1.0)
+    JK_LOGIC_PROCESS_TYPE		: <int> ,    (IM_DEV_DIRECT 9)
+    JK_ALARM_GUID			: <string> , (报警唯一标识 32位)
+    JK_ALARM_MESSAGE_TYPE		: <int> ,    (报警消息类型：0文本消息，1图片上传完成，2视频上传完成)
+    JK_DEVICE_GUID			: <string> , (设备云视通号)
+    JK_ALARM_TIMESTAMP			: <int> ,    (时间戳 time的返回值。云视通号与时间戳定位一次报警)
+    JK_DEVICE_NAME			: <string> , (设备名)
+    JK_DEVICE_CHANNEL_NO		: <int> ,    (发生报警的通道号)
+    JK_ALARM_TYPE			: <int> ,    (报警类型)
+    JK_ALARM_PIC			: <string> , (报警图片名称 可选)
+    JK_ALARM_PIC_SIZE			: <int> ,    (报警图片大小 可选)
+    JK_ALARM_VIDEO			: <string> , (报警视频名称 可选)
+    JK_ALARM_VIDEO_SIZE			: <int> ,    (报警视频大小 可选)
+}
+response:
+{
+    JK_MESSAGE_ID 	: <int> ,
+    JK_MESSAGE_TYPE 	: <int> , (PUSH_ALARM_MESSAGE_FTP_RESPONSE 2222)
+    JK_RESULT		: <int> , (0正确,其他为错误码)
+    JK_DEVICE_GUID	: <string> , (设备云视通号 把请求中的云视通号返回设备端)
+    JK_ALARM_TIMESTAMP	: <int> ,    (时间戳 把请求中的时间戳返回设备端)
+}
+返回值说明：0正确；-10请求格式错误；-1发送失败。
+
+
+
+二、云存储方案（待定）
+协议说明：设备发生报警，向报警服务器上报信息。图片/视频的URL由服务器通过云存储接口组织。
+request:
+{
+    JK_MESSAGE_ID			: <int> ,    (消息ID)
+    JK_MESSAGE_TYPE			: <int> ,    (PUSH_ALARM_MESSAGE_CLOUD 2223)
+    JK_PROTO_VERSION			: <string> , (1.0)
+    JK_LOGIC_PROCESS_TYPE		: <int> ,    (IM_DEV_DIRECT 9)
+    JK_ALARM_GUID			: <string> , (报警唯一标识 32位)
+    JK_ALARM_MESSAGE_TYPE		: <int> ,    (报警消息类型：0文本消息，1图片上传完成，2视频上传完成)
+    JK_DEVICE_GUID			: <string> , (设备云视通号)
+    JK_ALARM_TIMESTAMP			: <int> ,    (时间戳 time的返回值。云视通号与时间戳定位一次报警)
+    JK_DEVICE_NAME			: <string> , (设备名)
+    JK_DEVICE_CHANNEL_NO		: <int> ,    (发生报警的通道号)
+    JK_ALARM_TYPE			: <int> ,    (报警类型)
+    JK_ALARM_PIC			: <string> , (报警图片名称)
+    JK_ALARM_PIC_SIZE			: <int> ,    (报警图片大小)
+    JK_ALARM_VIDEO			: <string> , (报警视频名称)
+    JK_ALARM_VIDEO_SIZE			: <int> ,    (报警视频大小)
+}
+response:
+{
+    JK_MESSAGE_ID 	: <int> ,
+    JK_MESSAGE_TYPE 	: <int> , (PUSH_ALARM_MESSAGE_CLOUD_RESPONSE 2224)
+    JK_RESULT		: <int> , (0正确,其他为错误码)
+    JK_DEVICE_GUID	: <string> , (设备云视通号 把请求中的云视通号返回设备端)
+    JK_ALARM_TIMESTAMP	: <int> ,    (时间戳 把请求中的时间戳返回设备端)
+}
+返回值说明：0正确；-10请求格式错误；-1发送失败。
+
+
+#define JK_DEVICE_CHANNEL_NO	"dcn"
+#define JK_ALARM_MESSAGE_TYPE	"amt"
+
+#define JK_ALARM_TYPE		"atype"
+
+#define JK_ALARM_PIC		"apic"
+
+#define JK_ALARM_PIC_SIZE	"apicsz"
+
+#define JK_ALARM_VIDEO		"avd"
+
+#define JK_ALARM_VIDEO_SZIE	"avdsz"
+
+#define JK_ALARM_TIMESTAMP	"ats"
+
+
+调试实例：
+
+云视通方案：一次报警只发一个文本消息。
+{"mt":2219,"lpt":9,"pv":"1.0","mid":99,"dguid":"S35084741","ats":1411626360,"dname":"HD_IPC","dcn":1,"atype":9,"apic":"100634.jpg","avideo":"100634.mp4"}
+{"mt":2220,"rt":0,"mid":99,"dguid":"S35084741","ats":1411626360}
+
+
+FTP方案：一次报警发送3条消息。
+文本消息
+{"mt":2221,"lpt":9,"pv":"1.0","mid":100,"amt":0,"dguid":"S35084741","ats":1411626387,"dname":"HD_IPC","dcn":1,"atype":9}
+{"mt":2222,"rt":0,"mid":100,"dguid":"S35084741","ats":1411626387}
+图片上传完成 (通过云视通号和时间戳定位报警 S35084741:1411626387)
+{"mt":2221,"lpt":9,"pv":"1.0","mid":101,"amt":1,"dguid":"S35084741","ats":1411626387}
+{"mt":2222,"rt":0,"mid":101,"dguid":"S35084741","ats":1411626387}
+视频上传完成 (通过云视通号和时间戳定位报警 S35084741:1411626387)
+{"mt":2221,"lpt":9,"pv":"1.0","mid":102,"amt":2,"dguid":"S35084741","ats":1411626387}
+{"mt":2222,"rt":0,"mid":101,"dguid":"S35084741","ats":1411626387}

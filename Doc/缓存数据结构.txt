@@ -1,0 +1,8 @@
+本地方案：
+alarm_guid|alarm_solution|device_guid|device_name|channel_no|alarm_type|pic_name|vedio_name|alarm_timestamp
+报警标识|AS_LOCAL|设备云视通号|设备名|通道号|报警类型|图片url|视频url|报警时间
+
+
+FTP方案：
+alarm_guid|alarm_solution|message_status|device_guid|device_name|channel_no|alarm_type|pic_name|vedio_name|alarm_timestamp
+报警标识|AS_LOCAL|消息状态类型(0只收到文本消息，1收到图片，2收到视频，3图片视频)|设备云视通号|设备名|通道号|报警类型|图片url|视频url|报警时间

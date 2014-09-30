@@ -1,0 +1,15 @@
+CXXFLAGS =	-O0 -g -Wall -fmessage-length=0 -DNDEBUG -DUSE_LOG4CXX -DUSE_LOG4CXX_PTR
+MIDOBJS = SdkSrc/net_interface.o SdkSrc/net_interface_impl.o  \
+		  SdkSrc/net_data_layer.o SdkSrc/net_inter_layer.o SdkSrc/net_core_layer.o \
+
+TARGET = libclientchannel.a
+LIBS = -lrt -lgtest  -lboost_system -lboost_filesystem -lboost_thread -lboost_regex \
+		-llog4cxx  -levent -ljson -Wl,-rpath,/usr/local/lib 
+
+libclientchannel.a: $(MIDOBJS)
+	ar rcs libclientchannel.a $(MIDOBJS)
+
+all:	$(TARGET)
+
+clean:
+	rm -f $(MIDOBJS) $(TARGET)
